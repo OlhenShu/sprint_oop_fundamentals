@@ -3,7 +3,7 @@ name: Practical TAQC course
 on:
   push:
     branches:
-      - task1
+      - task2
   workflow_dispatch:
 
 jobs:
