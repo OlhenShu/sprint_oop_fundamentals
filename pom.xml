@@ -60,7 +60,7 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub OWNER Apache Maven Packages</name>
-			<url>https://github.com/OlhenShu/sprint_oop_fundamentals.git</url>
+			<url>https://maven.pkg.github.com/OlhenShu/sprint_oop_fundamentals.git</url>
 		</repository>
 	</distributionManagement>
 	<build>
