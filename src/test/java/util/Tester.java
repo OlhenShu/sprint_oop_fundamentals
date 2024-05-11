@@ -5,18 +5,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
-
+import java.util.LinkedList;
+import java.util.List;
 
 public class Tester {
-
-    public static boolean isClassPublic(final String typeName) {
-        try {
-            final Class<?> clazz = Class.forName(typeName);
-            return Modifier.isPublic(clazz.getModifiers());
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
 
     public static boolean isTypeAbstractClass(final String typeName) {
         try {
@@ -101,15 +93,7 @@ public class Tester {
             return false;
         }
     }
-    public static boolean isConstructorPublic(final String typeName, final Class<?>[] parameterTypes) {
-        try {
-            final Class<?> clazz = Class.forName(typeName);
-            final Constructor<?> constructor = clazz.getDeclaredConstructor(parameterTypes);
-            return Modifier.isPublic(constructor.getModifiers());
-        } catch (ClassNotFoundException | NoSuchMethodException ex) {
-            return false;
-        }
-    }
+
     public static boolean hasFieldType(final String typeName, final String fieldName, final Class<?> fieldType) {
         try {
             final Class<?> clazz = Class.forName(typeName);
@@ -125,4 +109,5 @@ public class Tester {
             return false;
         }
     }
+
 }

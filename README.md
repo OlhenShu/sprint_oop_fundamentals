@@ -1,54 +1,26 @@
-# Welcome to Practical Test Automation
-### Sprint 1 OOP Fundamentals
+# Welcome to Practical Test Automation 
+## Task 2 `RegistrationForm` Validation Methods
 
-### Task 1 RegistrationForm Class
-Create the public **RegistrationForm** class for storing and managing user registration form data.
+**Username Validation (`validateUsername`)**
 
-**Class Fields**:
-- Username (`String username`)
-- Email (`String email`)
-- Password (`String password`)
-- Confirm Password (`String confirmPassword`)
-- Phone Number (`String phoneNumber`)
-- Birth Date (`String birthDate`)
+- **Non-Empty String**: The username must not be empty.
+- **Latin Alphabet Only**: Each character in the username must be a letter from the Latin alphabet.
+- **Error Message**: Return an appropriate error message if the username does not meet the criteria.
 
-All fields have a private type.
+**Email Validation (`validateEmail`)**
 
-**Constructors**
+- **Presence of "@" and ".":** The email address must contain the "@" symbol and a dot (".") after the "@" in the correct order.
+- **No Spaces**: The email address must not contain any spaces.
+- **Sufficient Length**: The email address must be at least 5 characters long.
+- **Error Message**: Provide a detailed error message if the email address does not meet the requirements.
 
-- Default constructor.
-- Parameterized constructor for initializing all fields. 
-- Both constructors are public.
+**Password Validation (`validatePassword`)**
 
-**Access Methods**
+- **Minimum Length**: The password must be at least 8 characters long.
+- **Complexity**: The password should include at least one digit, one uppercase letter, one lowercase letter, and one special character.
+- **Error Message**: Return an error message detailing the required complexity if the password does not meet the standards.
 
-- Getters and setters for fields, where it's necessary.
+**Validation Feedback**
 
-**Method for Calculating User's Age**
-
-- Calculate age based on the birthdate, named method `calculateAge()`.
-
- `calculateAge()`**Method Requirements:**
-
-**Input Exceptions**:
-
-- **Null and Empty String Check**:
-    - If the input parameter `birthDate` is `null` or an empty string, the method must throw an `IllegalArgumentException` with the message: `"Birth date cannot be null or empty"`.
-
-- **Date Format Validation**:
-    - The birthdate has to be in the "yyyy-MM-dd" format. If parsing fails due to an incorrect format, a `DateTimeParseException` should be thrown, carrying the message: `"Invalid birth date format. Please use yyyy-MM-dd."`.
-
-- **Future Date Check**:
-    - If the parsed birthdate (`birthdate`) occurs after `LocalDate.now()`, an `IllegalArgumentException` should be thrown with the message: `"Birth date cannot be in the future"`.
-
-**Method for Displaying User Information**
-
-- `displayUserInfo()`: Outputs user information: username, email, and calculated age.
-
-**Usage Example**
-- When implementing a class, uncomment the test class code. Run the tests to verify the implementation.
-- Create an instance of the **RegistrationForm** class.
-- Initialize the instance with test data.
-- Use the `displayUserInfo()` method to display user information.
-For example:
-![img.png](img.png)
+Each validation method should return a string with a detailed description of the error. 
+When validation failures are detected or an empty string/`null` if the data passes validation successfully.
