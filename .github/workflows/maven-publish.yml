@@ -1,9 +1,12 @@
-name: Practical TAQC course
+name: Practical course TAQC
 
 on:
   push:
     branches:
       - task1
+      - task2
+      - task3
+      - task4
   workflow_dispatch:
 
 jobs:
@@ -37,7 +40,7 @@ jobs:
           # Run the tests and capture the output
           output=$(mvn test)
           # Check if the specific string is in the output
-          if ! echo "$output" | grep -q "Running task1.RegistrationFormTest"; then
+          if ! echo "$output" | grep -q "Running task4.LoginFormTest"; then
             echo "Test suite did not run."
             exit 1
           fi
@@ -51,7 +54,7 @@ jobs:
 
       - name: Check Test Result
         run: |
-          if ! mvn test | grep -q "Tests run: 38, Failures: 0, Errors: 0, Skipped: 0"; then
+          if ! mvn test | grep -q "Tests run: 14, Failures: 0, Errors: 0, Skipped: 0"; then
             echo "Test results do not match expected values."
             exit 1
           fi
