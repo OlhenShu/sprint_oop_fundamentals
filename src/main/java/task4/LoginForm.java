@@ -4,5 +4,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginForm extends RegistrationForm {
-
+//your solution
 }
