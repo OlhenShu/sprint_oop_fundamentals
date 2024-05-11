@@ -1,26 +1,24 @@
 # Welcome to Practical Test Automation 
-## Task 2 `RegistrationForm` Validation Methods
+## Task 3 Enhancements to the `RegistrationForm` Class
 
-**Username Validation (`validateUsername`)**
+To augment the existing `RegistrationForm` class with functionalities for automatic data generation that meets specific validation criteria, and to implement a method for creating an object populated with these generated values.
 
-- **Non-Empty String**: The username must not be empty.
-- **Latin Alphabet Only**: Each character in the username must be a letter from the Latin alphabet.
-- **Error Message**: Return an appropriate error message if the username does not meet the criteria.
+### Components to be Added
 
-**Email Validation (`validateEmail`)**
+- **Username Generation Method (`generateUsername`):**
+    - Should automatically generate a username adhering to the validation requirements specified in `validateUsername`.
+    - For instance, the username may only include Latin letters and must have a predetermined length.
 
-- **Presence of "@" and ".":** The email address must contain the "@" symbol and a dot (".") after the "@" in the correct order.
-- **No Spaces**: The email address must not contain any spaces.
-- **Sufficient Length**: The email address must be at least 5 characters long.
-- **Error Message**: Provide a detailed error message if the email address does not meet the requirements.
+- **Email Generation Method (`generateEmail`):**
+    - Aimed at creating a valid email address for the user, meeting common email validation standards (presence of '@', a domain part, absence of prohibited characters).
 
-**Password Validation (`validatePassword`)**
+- **Password Generation Method (`generatePassword`):**
+    - Ensures the generation of a secure password that conforms to specified criteria, including minimum length, inclusion of digits, both uppercase and lowercase letters, and special characters.
 
-- **Minimum Length**: The password must be at least 8 characters long.
-- **Complexity**: The password should include at least one digit, one uppercase letter, one lowercase letter, and one special character.
-- **Error Message**: Return an error message detailing the required complexity if the password does not meet the standards.
+- **Object Creation with Generated Data (`createRandomUser`):**
+    - Uses the above methods to instantiate a new `RegistrationForm` object with a valid username, email, and password.
 
-**Validation Feedback**
+### Implementation Requirements
 
-Each validation method should return a string with a detailed description of the error. 
-When validation failures are detected or an empty string/`null` if the data passes validation successfully.
+- All generated data must successfully pass through the validation checks provided by `validateUsername`, `validateEmail`, and `validatePassword` methods.
+- The generated password should align with contemporary security standards.

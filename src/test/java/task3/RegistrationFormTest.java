@@ -1,4 +1,4 @@
-package task2;
+package task3;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,13 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RegistrationFormTest {
-    private static final String PACKAGE = "task2.";
-
-    private static Stream<Arguments> listOfClasses() {
-        return Stream.of(
-                Arguments.of("RegistrationForm")
-        );
-    }
+    private static final String PACKAGE = "task3.";
 
     private static Stream<String> fieldNames() {
         return Stream.of("username", "email", "password");
@@ -34,6 +28,35 @@ class RegistrationFormTest {
                 Map.entry("password", String.class)
         );
     }
+    static Stream<Arguments> usernameProvider() {
+        return Stream.of(
+                Arguments.of("", "Username cannot be null or empty."),
+                Arguments.of(" ", "Username cannot be null or empty."),
+                Arguments.of("User1", "Username must contain only letters from the Latin alphabet."),
+                Arguments.of("ValidUsername", "")
+        );
+    }
+    static Stream<Arguments> emailProvider() {
+        return Stream.of(
+                Arguments.of("", "Email cannot be null or empty."),
+                Arguments.of("user", "Email must be at least 5 characters long."),
+                Arguments.of("user@", "Email must contain '@' and '.', with no spaces and '.' must follow '@'."),
+                Arguments.of("user@example", "Email must contain '@' and '.', with no spaces and '.' must follow '@'."),
+                Arguments.of("user@example.com", "")
+        );
+    }
+    static Stream<Arguments> passwordProvider() {
+        return Stream.of(
+                Arguments.of("short", "Password must be at least 8 characters long."),
+                Arguments.of("Long1!", "Password must be at least 8 characters long."),
+                Arguments.of("longpa1!", "Password must include at least one uppercase letter."),
+                Arguments.of("longenough", "Password must include at least one number."),
+                Arguments.of("LONGPASS1!", "Password must include at least one lowercase letter."),
+                Arguments.of("Longenough1", "Password must include at least one special character."),
+                Arguments.of("", "Password must be at least 8 characters long.")
+        );
+    }
+
 
     @Test
     @DisplayName("Default constructor of RegistrationForm should be public")
@@ -95,14 +118,7 @@ class RegistrationFormTest {
         }
     }
 
-    static Stream<Arguments> usernameProvider() {
-        return Stream.of(
-                Arguments.of("", "Username cannot be null or empty."),
-                Arguments.of(" ", "Username cannot be null or empty."),
-                Arguments.of("User1", "Username must contain only letters from the Latin alphabet."),
-                Arguments.of("ValidUsername", "")
-        );
-    }
+
 
 //    @ParameterizedTest
 //    @MethodSource("usernameProvider")
@@ -112,15 +128,7 @@ class RegistrationFormTest {
 //        assertEquals(expectedMessage, form.validateUsername());
 //    }
 //
-//    static Stream<Arguments> emailProvider() {
-//        return Stream.of(
-//                Arguments.of("", "Email cannot be null or empty."),
-//                Arguments.of("user", "Email must be at least 5 characters long."),
-//                Arguments.of("user@", "Email must contain '@' and '.', with no spaces and '.' must follow '@'."),
-//                Arguments.of("user@example", "Email must contain '@' and '.', with no spaces and '.' must follow '@'."),
-//                Arguments.of("user@example.com", "")
-//        );
-//    }
+//
 //
 //    @ParameterizedTest
 //    @MethodSource("emailProvider")
@@ -130,17 +138,6 @@ class RegistrationFormTest {
 //        assertEquals(expectedMessage, form.validateEmail());
 //    }
 //
-//    static Stream<Arguments> passwordProvider() {
-//        return Stream.of(
-//                Arguments.of("short", "Password must be at least 8 characters long."),
-//                Arguments.of("Long1!", "Password must be at least 8 characters long."),
-//                Arguments.of("longpa1!", "Password must include at least one uppercase letter."),
-//                Arguments.of("longenough", "Password must include at least one number."),
-//                Arguments.of("LONGPASS1!", "Password must include at least one lowercase letter."),
-//                Arguments.of("Longenough1", "Password must include at least one special character."),
-//                Arguments.of("", "Password must be at least 8 characters long.")
-//        );
-//    }
 //
 //    @ParameterizedTest
 //    @MethodSource("passwordProvider")
@@ -212,6 +209,46 @@ class RegistrationFormTest {
 //        assertEquals(username, form.getUsername());
 //        assertEquals(email, form.getEmail());
 //        assertEquals(password, form.getPassword());
+//    }
+//
+//    @Test
+//    @DisplayName("Generated username should be non-null and of correct length")
+//    void testGenerateUsername() {
+//        RegistrationForm form = new RegistrationForm();
+//        String username = form.generateUsername();
+//        assertNotNull(username, "Generated username should not be null");
+//        assertEquals(RegistrationForm.USERNAME_LENGTH, username.length(), "Generated username should be of correct length");
+//    }
+//
+//    @Test
+//    @DisplayName("Generated email should be non-null and contain '@'")
+//    void testGenerateEmail() {
+//        RegistrationForm form = new RegistrationForm();
+//        String email = form.generateEmail();
+//        assertNotNull(email, "Generated email should not be null");
+//        assertTrue(email.contains("@"), "Generated email should contain '@'");
+//    }
+//
+//    @Test
+//    @DisplayName("Generated password should be non-null and of correct length")
+//    void testGeneratePassword() {
+//        RegistrationForm form = new RegistrationForm();
+//        String password = form.generatePassword(PASSWORD_LENGTH);
+//        assertNotNull(password, "Generated password should not be null");
+//        assertTrue(password.length() >= 8, "Generated password should be at least 8 characters long");
+//    }
+//
+//    @Test
+//    @DisplayName("CreateRandomUser generates a user with valid data")
+//    void testCreateRandomUser() {
+//        RegistrationForm user = RegistrationForm.createRandomUser();
+//        assertNotNull(user.getUsername(), "Username should not be null");
+//        assertNotNull(user.getEmail(), "Email should not be null");
+//        assertNotNull(user.getPassword(), "Password should not be null");
+//        assertTrue(user.getPassword().length() >= 10, "Password should be at least 10 characters long");
+//        assertEquals("", user.validateUsername(), "Username should pass validation");
+//        assertEquals("", user.validateEmail(), "Email should pass validation");
+//        assertEquals("", user.validatePassword(), "Password should pass validation");
 //    }
 
 }
