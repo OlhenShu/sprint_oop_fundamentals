@@ -1,24 +1,17 @@
 # Welcome to Practical Test Automation 
-## Task 3 Enhancements to the `RegistrationForm` Class
+## Task 4 Extending the RegistrationForm Class:
 
-To augment the existing `RegistrationForm` class with functionalities for automatic data generation that meets specific validation criteria, and to implement a method for creating an object populated with these generated values.
+#### The `LoginForm` Class:
 
-### Components to be Added
+- Extends the `RegistrationForm` class, inheriting fields for username, email, and password.
+- Includes an `authenticate` method to verify the match between the username and password. If three unsuccessful login attempts occur, the user account is locked, and an exception is thrown with a blocking message.
+- Contains a `changePassword` method that allows the user to change their password after verifying the old password.
 
-- **Username Generation Method (`generateUsername`):**
-    - Should automatically generate a username adhering to the validation requirements specified in `validateUsername`.
-    - For instance, the username may only include Latin letters and must have a predetermined length.
+#### Error Handling:
 
-- **Email Generation Method (`generateEmail`):**
-    - Aimed at creating a valid email address for the user, meeting common email validation standards (presence of '@', a domain part, absence of prohibited characters).
+- Login attempts with an incorrect password trigger an exception with a corresponding message.
+- Exceeding the number of login attempts (three attempts) leads to the account being locked and an exception being thrown with a blocking message.
 
-- **Password Generation Method (`generatePassword`):**
-    - Ensures the generation of a secure password that conforms to specified criteria, including minimum length, inclusion of digits, both uppercase and lowercase letters, and special characters.
+#### Limit on the Number of Login Attempts:
 
-- **Object Creation with Generated Data (`createRandomUser`):**
-    - Uses the above methods to instantiate a new `RegistrationForm` object with a valid username, email, and password.
-
-### Implementation Requirements
-
-- All generated data must successfully pass through the validation checks provided by `validateUsername`, `validateEmail`, and `validatePassword` methods.
-- The generated password should align with contemporary security standards.
+- The system monitors the number of unsuccessful login attempts for each user. The account is locked after three unsuccessful attempts.
