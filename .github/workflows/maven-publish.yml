@@ -1,0 +1,62 @@
+name: Practical TAQC course
+
+on:
+  push:
+    branches:
+      - task1
+  workflow_dispatch:
+
+jobs:
+  build-and-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Run tests and check results directly
+        id: test
+        run: mvn test
+        continue-on-error: true
+
+      - name: Check Test Running
+        run: |
+          # Run the tests and capture the output
+          output=$(mvn test)
+          # Check if the specific string is in the output
+          if ! echo "$output" | grep -q "Running task1.RegistrationFormTest"; then
+            echo "Test suite did not run."
+            exit 1
+          fi
+
+      - name: Check for Failure
+        run: |
+          if mvn test | grep -q "FAILURE!"; then
+            echo "A test has failed."
+            exit 1
+          fi
+
+      - name: Check Test Result
+        run: |
+          if ! mvn test | grep -q "Tests run: 38, Failures: 0, Errors: 0, Skipped: 0"; then
+            echo "Test results do not match expected values."
+            exit 1
+          fi
+
+      - name: Publish to GitHub Packages
+        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
